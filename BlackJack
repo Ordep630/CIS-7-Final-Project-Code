@@ -1,0 +1,100 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <vector>
+#include<algorithm>
+using namespace std;
+
+//Defined Structure for cards
+struct card{
+  string suit;
+  string rank;
+};
+//class for deck of cards
+class deck{
+private:
+  vector<card>cards;
+
+public:
+  deck(){
+    string suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+    string ranks[] = {"Ace", "2", "3", "4", "5", "6","7", "8", "9", "10", "Jack", "Queen", "King"};
+
+    for(const string &suit : suits){
+      for(const string &rank : ranks){
+        cards.push_back({suit, rank});
+    }
+  }
+}
+
+//Function to shuffle the deck
+void shuffle(){
+  srand(time(0));
+  random_shuffle(cards.begin(), cards.end());
+}
+
+//function to deal cards
+card cardDeal(){
+  card dealtCard = cards.back();
+  cards.pop_back();
+  return dealtCard;
+  }
+};
+
+//Blackjack game class
+class Blackjack{
+private:
+  deck Deck;
+  vector<card>playerHand;
+  vector<card>dealerHand;
+
+public:
+  //initialize the game
+  Blackjack(){
+    Deck.cardDeal();
+    //deal tw0 cards to the player and dealer
+    playerHand.push_back(Deck.cardDeal());
+    dealerHand.push_back(Deck.cardDeal());
+    playerHand.push_back(Deck.cardDeal());
+    dealerHand.push_back(Deck.cardDeal());
+  }
+};
+//Function calculates hand total
+int handTotal(vector<card>hand){
+  int tot = 0;
+  int aceTot = 0;
+
+  for(const card &card : hand){
+    if(card.rank == "Ace"){
+      aceTot++;
+      tot += 11;
+    } else if(card.rank == "King" || card.rank == "Queen" || card.rank == "Jack"){
+      tot += 10;
+    } else{
+      tot += stoi(card.rank);
+    }
+}
+while (tot > 21 && aceTot > 0){
+  tot -= 10;
+  aceTot--;
+}
+  return tot;
+}
+//Function to check for blackjack in 2 cards
+bool chkBlkjck(vector<card>hand){
+  if(hand.size() == 2){
+    if(hand[0].rank == "Ace" && hand[1].rank == "10"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}
+int main() {
+  Blackjack game;
+  
+  
+  return 0;
+}
