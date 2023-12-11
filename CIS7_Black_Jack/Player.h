@@ -6,13 +6,13 @@
 
 class Player {
 private:
-    int money;  // Player's money or chips
+    
     int bet;    // Player's current bet
 
 public:
     // Constructor with default initial money set to $1000
     Player(int initialMoney = 1000);
-
+int money;  // Player's money or chips
     // Function to place a bet
     bool placeBet(int betAmount);
 

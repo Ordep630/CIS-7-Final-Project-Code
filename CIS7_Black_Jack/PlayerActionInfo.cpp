@@ -111,7 +111,6 @@ int PlayerActionInfo::getHardTotalAction(const std::vector<Card>& playerHand, co
             }
         }
     }
-    std::cout << row <<col;
     // If row and col != 0 then an action has been found
     if( row != 0 && col != 0){
         return hardTotalArray[row][col];
@@ -135,7 +134,6 @@ int PlayerActionInfo::getSoftTotalAction(const std::vector<Card>& playerHand, co
             }
         }
     }
-    std::cout << row <<col;
     // If row and col != 0 then an action has been found
     if( row != 0 && col != 0){
         return softTotalArray[row][col];
@@ -159,23 +157,22 @@ bool PlayerActionInfo::getPairAction(int value, const std::vector<Card>& houseHa
             }
         }
     }
-    std::cout << std::endl<< row <<col<< std::endl;
     char action = static_cast<char>(pairArray[row][col]);
     std::cout << action;
     switch(action){
         case 'H':
-            std::cout << "Don't split, best move is to hit!\n";
+            std::cout << "Don't split!\n";
             return false;
             break;
         case 'S':
-            std::cout << "Don't split, best move is to stand!\n";
+            std::cout << "Don't split!\n";
             return false;
             break;
         case 's':
             std::cout << "Best move is to split! ";
             break;
         case 'D':
-            std::cout << " Don't split, best move is to double!\n";
+            std::cout << " Don't split!\n";
             return false;
             break;
     }

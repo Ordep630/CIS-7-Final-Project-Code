@@ -118,11 +118,12 @@ void Game::splitHit() {
     splitHand.push_back(deck.drawCard());
 }
 void Game::houseHit(){
-    splitHand.push_back(deck.drawCard());
+    houseHand.push_back(deck.drawCard());
 }
 
 void Game::doubleDown(int doubledBet) {
     player.placeBet(doubledBet);
+    hit();
 }
 
 void Game::split() {
@@ -165,4 +166,3 @@ int Game::calculateHandValue(const std::vector<Card>& hand) const {
 
     return totalValue;
 }
-
