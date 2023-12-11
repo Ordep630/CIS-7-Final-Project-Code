@@ -4,7 +4,7 @@
 bool playAgain = true;
 
 int main() {
-    
+
     while (playAgain) {
         // Create the objects
         Game game;
@@ -13,17 +13,27 @@ int main() {
         Probability probability;
 
         // Prompt the player for a bet
-int betAmount;
+        int betAmount;
         std::cout << "available money: " << player.money << std::endl;
         std::cout << "Place your bet: ";
         std::cin >> betAmount;
-
-        // Start a new round
-        game.startRound(betAmount);
-
         char choice;
         bool playerBust = false, endLoop = false, splitEnd = false, stand = false;
         int handValue;
+        // Start a new round
+        game.startRound(betAmount);
+        if (game.calculateHandValue(game.playerHand) == 21) {
+            if (game.calculateHandValue(game.playerHand) == game.calculateHandValue(game.houseHand)) {
+                player.money += betAmount;
+                std::cout << "It's a push :/ Remaining money: " << player.money << std::endl;
+                endLoop = true;
+            }
+
+            std::cout << "You win! Remaining money: " << player.money << std::endl;
+            endLoop = true;
+        }
+
+
         while (!endLoop) {
             char hardAction, softAction, hardSplitAction, softSplitAction;
             char action, splitAction;
@@ -35,7 +45,7 @@ int betAmount;
 
             if (game.splitState) {
                 hardAction = static_cast<char> (bestMove.getHardTotalAction(game.playerHand, game.houseHand, handValue));
-                if (game.playerHand[0].value = 1) {
+                if (game.playerHand[0].value == 1) {
                     softAction = static_cast<char> (bestMove.getSoftTotalAction(game.playerHand, game.houseHand, splitValue));
                 }
                 hardSplitAction = static_cast<char> (bestMove.getHardTotalAction(game.playerHand, game.houseHand, game.calculateHandValue(game.playerHand)));
@@ -46,6 +56,7 @@ int betAmount;
                 hardAction = static_cast<char> (bestMove.getHardTotalAction(game.playerHand, game.houseHand, game.calculateHandValue(game.playerHand)));
                 if (game.playerHand[0].value == 1) {
                     softAction = static_cast<char> (bestMove.getSoftTotalAction(game.playerHand, game.houseHand, handValue));
+                    std::cout << softAction;
                     action = softAction;
                 } else {
                     action = hardAction;
@@ -61,7 +72,7 @@ int betAmount;
                     std::cout << "Best move is to stand main hand!\n";
                     break;
                 case 'D':
-                    std::cout << "Best move is to double main hand!";
+                    std::cout << "Best move is to double main hand!\n";
                     break;
             }
             switch (splitAction) {
@@ -72,7 +83,7 @@ int betAmount;
                     std::cout << "Best move is to stand with split hand!\n";
                     break;
                 case 'D':
-                    std::cout << "Best move is to double split hand!";
+                    std::cout << "Best move is to double split hand!\n";
                     break;
             }
 
@@ -83,7 +94,7 @@ int betAmount;
             std::cout << "4. Split hand hit\n";
             std::cout << "5. Split hand double\n";
             std::cout << "6. Split hand stand\n";
-            std::cout << "Enter your choice (1-3): ";
+            std::cout << "Enter your choice (1-6): ";
 
             // Get player's choice
             std::cin >> choice;
@@ -93,7 +104,8 @@ int betAmount;
                     game.hit();
                     break;
                 case 2:
-                    game.doubleDown(betAmount * 2);
+                    betAmount *= 2;
+                    game.doubleDown(betAmount);
                     // Add logic for doubling down
                     break;
                 case 3:
@@ -127,7 +139,7 @@ int betAmount;
             int hand = game.calculateHandValue(game.playerHand);
             int house = game.calculateHandValue(game.houseHand);
             if (game.splitState) {
-               
+
                 int split = game.calculateHandValue(game.splitHand);
                 if (hand > 21) {
                     player.money += -betAmount;
@@ -139,7 +151,7 @@ int betAmount;
                     std::cout << "Split hand busted :( Remaining money: " << player.money << std::endl;
 
                 }
-                if (split> 21 && hand > 21) {
+                if (split > 21 && hand > 21) {
                     player.money += -(betAmount * 2);
                     std::cout << "Both hands busted :( Remaining money: " << player.money << std::endl;
                     endLoop = true;
@@ -152,36 +164,35 @@ int betAmount;
             }
 
             if (stand) {
-            // Keep hitting house hand until it is above 17
-            while (game.calculateHandValue(game.houseHand) < 17) {
-                game.houseHit();
-                std::cout << game.calculateHandValue(game.houseHand) <<std::endl;
+                // Keep hitting house hand until it is above 17
+                while (house < 17) {
+                    game.houseHit();
+                    house = game.calculateHandValue(game.houseHand);
+                }
+
+                if (hand > house) {
+                    player.money += betAmount * 2; // Paying out a 2x bet to keep it simple
+                    std::cout << "You win! Remaining money: " << player.money << std::endl;
+                    endLoop = true;
+                } else if (hand == house) {
+                    player.money += betAmount;
+                    std::cout << "It's a push :/ Remaining money: " << player.money << std::endl;
+                    endLoop = true;
+                } else if (house > 21) {
+                    player.money += betAmount * 2;
+                    std::cout << "House busted, you win! Remaining money: " << player.money << std::endl;
+                    endLoop = true;
+                } else {
+                    player.money += -betAmount;
+                    std::cout << "House hand = " << house << ", your hand = " << hand << ", house wins :( Remaining money: " << player.money << std::endl;
+                }
             }
-        
-        if (hand > house) {
-            player.money += betAmount * 2; // Paying out a 2x bet to keep it simple
-            std::cout << "You win! Remaining money: " << player.money << std::endl;
-            endLoop = true;
-        } else if (hand == house) {
-            player.money += betAmount;
-            std::cout << "It's a push :/ Remaining money: " << player.money << std::endl;
-            endLoop = true;
-        } else if (house > 21) {
-            player.money += betAmount * 2;
-            std::cout << "House busted, you win! Remaining money: " << player.money << std::endl;
-            endLoop = true;
-        }
-        else {
-            player.money += -betAmount;
-            std::cout << "House hand = " << house << ", your hand = " << hand << ", house wins :( Remaining money: " << player.money << std::endl;
-        }
-        }
         }
 
-    std::cout << "Keep playing? (Y/N): ";
-    std::cin >> choice;
-    if (choice == 'n' || choice == 'N')
-        playAgain = false;
+        std::cout << "Keep playing? (Y/N): ";
+        std::cin >> choice;
+        if (choice == 'n' || choice == 'N')
+            playAgain = false;
     }
     return 0;
 

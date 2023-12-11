@@ -44,14 +44,14 @@ PlayerActionInfo::PlayerActionInfo() {
     }
     int softValues[9][14] = {
         {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1},
-        {10,'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
-        {9,'S', 'S', 'S', 'S', 'D', 'S', 'S', 'S', 'S', 'S'},
-        {8,'D', 'D', 'D', 'D', 'D', 'S', 'S', 'H', 'H', 'H'},
-        {7, 'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
-        {6, 'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {9,'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {8,'S', 'S', 'S', 'S', 'D', 'S', 'S', 'S', 'S', 'S'},
+        {7,'D', 'D', 'D', 'D', 'D', 'S', 'S', 'H', 'H', 'H'},
+        {6, 'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
         {5, 'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
-        {4, 'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {4, 'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
         {3, 'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {2, 'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
     };
     for (int i = 0; i < softTotalRows; ++i) {
         for (int j = 0; j < softTotalCols; ++j) {
@@ -98,11 +98,10 @@ PlayerActionInfo::~PlayerActionInfo() {
 
 
 int PlayerActionInfo::getHardTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand, int playerHandValue) const {
-    
     int row = 0, col = 0;
     int i, j;
     for(i = 1; i < hardTotalRows; i++){
-        if(playerHandValue == hardTotalArray[i][0]){
+        if(playerHand.back().value == hardTotalArray[i][0]){
             row = i;
             for(j = 1; j < hardTotalCols; j++){
                 if(houseHand[1].value == hardTotalArray[0][j]){
