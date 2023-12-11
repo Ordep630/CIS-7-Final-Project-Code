@@ -19,6 +19,7 @@ void Deck::initializeDeck() {
             cards.emplace_back(value, suit);
         }
     }
+
 }
 
 // Function to shuffle the deck using a combination of srand and std::mt19937
@@ -29,7 +30,7 @@ void Deck::shuffleDeck() {
     // Use std::mt19937 for additional randomness
     std::mt19937 gen(std::rand());
 
-    // Shuffle the deck using rand and mt19937
+    // Shuffle the deck
     for (int i = static_cast<int>(cards.size()) - 1; i > 0; --i) {
         int j = std::rand() % (i + 1);
         std::swap(cards[i], cards[j]);
@@ -49,8 +50,9 @@ Card Deck::drawCard() {
         Card drawnCard = cards.back();
         cards.pop_back();
         return drawnCard;
+        
     }
-    // If the deck is empty, return a default card (you may want to handle this differently)
+    // If the deck is empty, return a default card
     return Card(0, 'N');  // 'N' for "No suit"
 }
 
@@ -77,7 +79,13 @@ std::vector<Card> Deck::dealToHouse() {
     return houseHand;
 }
 
+int Deck::deckSize() const {
+                return cards.size();
+}
 
+std::vector<Card> Deck::getRemainingCards() const {
+    return cards;
+}
 // Function to display the deck
 void Deck::displayDeck() const {
     for (const auto& card : cards) {

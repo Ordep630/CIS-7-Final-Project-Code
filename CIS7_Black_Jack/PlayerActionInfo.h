@@ -16,12 +16,12 @@ private:
     int** pairArray;
 
     // Sizes of the arrays
-    int hardTotalRows = 9;
-    int hardTotalCols = 10;
-    int softTotalRows = 6;
-    int softTotalCols = 10;
+    int hardTotalRows = 17;
+    int hardTotalCols = 14;
+    int softTotalRows = 9;
+    int softTotalCols = 14;
     int pairRows = 11;
-    int pairCols = 13;
+    int pairCols = 14;
     
     Deck deck;
     Player player;
@@ -34,9 +34,9 @@ public:
     ~PlayerActionInfo();
 
     // Functions to get the action for a specific hand value
-    bool getHardTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const;
-    bool getSoftTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const;
-    bool getPairAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const;
+    int getHardTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand, int playerHandValue) const;
+    int getSoftTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand, int playerHandValue) const;
+    bool getPairAction(int value, const std::vector<Card>& houseHand) const;
 };
 
 #endif

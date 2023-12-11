@@ -18,48 +18,58 @@ PlayerActionInfo::PlayerActionInfo() {
         pairArray[i] = new int[pairCols];
     }
     // 'S' = Stand, 's' = Split, 'H' = hit, 'D' = double
-    int hardValues [10][11] = {
-        {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-        {17, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
-        {16, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H'},
-        {15, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H'},
-        {13, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H'},
-        {12, 'H', 'H', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H'},
-        {11, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D'},
-        {10, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'H', 'H'},
-        {9, 'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
-        {5, 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+    int hardValues [17][14] = {
+        {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1},
+        {20, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {19, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {18, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {17, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {16, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {15, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {14, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {13, 'S', 'S', 'S', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {12, 'H', 'H', 'S', 'S', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {11, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D'},
+        {10, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'H', 'H', 'H'},
+        {9, 'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {8, 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {7, 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {6, 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {5, 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
     };
     for (int i = 0; i < hardTotalRows; ++i) {
         for (int j = 0; j < hardTotalCols; ++j) {
             hardTotalArray[i][j] = hardValues[i][j];
         }
     }
-    int softValues[6][10] = {
-        {'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
-        {'S', 'S', 'S', 'S', 'D', 'S', 'S', 'S', 'S', 'S'},
-        {'D', 'D', 'D', 'D', 'D', 'S', 'S', 'H', 'H', 'H'},
-        {'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
-        {'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
-        {'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'}
+    int softValues[9][14] = {
+        {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1},
+        {10,'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {9,'S', 'S', 'S', 'S', 'D', 'S', 'S', 'S', 'S', 'S'},
+        {8,'D', 'D', 'D', 'D', 'D', 'S', 'S', 'H', 'H', 'H'},
+        {7, 'H', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {6, 'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {5, 'H', 'H', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {4, 'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {3, 'H', 'H', 'H', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
     };
     for (int i = 0; i < softTotalRows; ++i) {
         for (int j = 0; j < softTotalCols; ++j) {
             softTotalArray[i][j] = softValues[i][j];
         }
     }
-    int pairs[11][13] = {
-        {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
-        {11, 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'},
-        {10, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
-        {9, 's', 's', 's', 's', 's', 's', 'S', 's', 'S', 'S', 'S', 'S'},
-        {8, 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'},
-        {7, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H'},
-        {6, 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
-        {5, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H'},
-        {4, 'H', 'H', 'H', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
-        {3, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H'},
-        {2, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H'},
+    int pairs[11][14] = {
+        {0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1},
+        {11, 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'},
+        {10, 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'},
+        {9, 's', 's', 's', 's', 's', 's', 'S', 's', 'S', 'S', 'S', 'S', 'S'},
+        {8, 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's', 's'},
+        {7, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {6, 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {5, 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'H', 'H', 'H', 'H', 'H'},
+        {4, 'H', 'H', 'H', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {3, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
+        {2, 's', 's', 's', 's', 's', 's', 'H', 'H', 'H', 'H', 'H', 'H', 'H'},
     };
     for (int i = 0; i < pairRows; ++i) {
         for (int j = 0; j < pairCols; ++j) {
@@ -86,26 +96,61 @@ PlayerActionInfo::~PlayerActionInfo() {
     delete[] pairArray;
 }
 
-bool PlayerActionInfo::getHardTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const {
-    // Example logic: return the action based on the hard total
-    // Customize this based on your game's rules for hard totals
-    // For simplicity, return 0 for all values
+
+int PlayerActionInfo::getHardTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand, int playerHandValue) const {
+    
+    int row = 0, col = 0;
+    int i, j;
+    for(i = 1; i < hardTotalRows; i++){
+        if(playerHandValue == hardTotalArray[i][0]){
+            row = i;
+            for(j = 1; j < hardTotalCols; j++){
+                if(houseHand[1].value == hardTotalArray[0][j]){
+                    col = j;
+                }
+            }
+        }
+    }
+    std::cout << row <<col;
+    // If row and col != 0 then an action has been found
+    if( row != 0 && col != 0){
+        return hardTotalArray[row][col];
+    }
+    else{
     return 0;
+    }
 }
 
-bool PlayerActionInfo::getSoftTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const {
-    // Example logic: return the action based on the soft total
-    // Customize this based on your game's rules for soft totals
-    // For simplicity, return 0 for all values
+int PlayerActionInfo::getSoftTotalAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand, int playerHandValue) const {
+       
+    int row = 0, col = 0;
+    int i, j;
+    for(i = 1; i < softTotalRows; i++){
+        if(playerHandValue == softTotalArray[i][0]){
+            row = i;
+            for(j = 1; j < softTotalCols; j++){
+                if(houseHand[1].value == softTotalArray[0][j]){
+                    col = j;
+                }
+            }
+        }
+    }
+    std::cout << row <<col;
+    // If row and col != 0 then an action has been found
+    if( row != 0 && col != 0){
+        return softTotalArray[row][col];
+    }
+    else{
     return 0;
+    }
 }
 
-bool PlayerActionInfo::getPairAction(const std::vector<Card>& playerHand, const std::vector<Card>& houseHand) const {
+bool PlayerActionInfo::getPairAction(int value, const std::vector<Card>& houseHand) const {
     // Look at Array for pair moves, skip first row since that is house hand values
     int row = 0, col = 0;
     int i, j;
     for(i = 1; i < pairRows; i++){
-        if(playerHand[0].value == pairArray[i][0]){
+        if(value == pairArray[i][0]){
             row = i;
             for(j = 1; j < pairCols; j++){
                 if(houseHand[1].value == pairArray[0][j]){
@@ -114,21 +159,23 @@ bool PlayerActionInfo::getPairAction(const std::vector<Card>& playerHand, const 
             }
         }
     }
+    std::cout << std::endl<< row <<col<< std::endl;
     char action = static_cast<char>(pairArray[row][col]);
+    std::cout << action;
     switch(action){
         case 'H':
-            std::cout << "Don't split!\n";
+            std::cout << "Don't split, best move is to hit!\n";
             return false;
             break;
         case 'S':
-            std::cout << "Don't split!\n";
+            std::cout << "Don't split, best move is to stand!\n";
             return false;
             break;
         case 's':
             std::cout << "Best move is to split! ";
             break;
         case 'D':
-            std::cout << " Don't split!";
+            std::cout << " Don't split, best move is to double!\n";
             return false;
             break;
     }

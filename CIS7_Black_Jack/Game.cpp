@@ -6,9 +6,8 @@
 // Constructor
 
 Game::Game() {
-    // Initialize the deck
-    deck.initializeDeck();
-    deck.shuffleDeck();
+deck.initializeDeck();
+   deck.shuffleDeck();
 }
 
 // Function to start a new round
@@ -28,8 +27,15 @@ void Game::startRound(int betAmount) {
     displayHands();
 
     // Check if the player can split
-    if (playerHand.size() == 2 && playerHand[0].value == playerHand[1].value) {
-        if (bestMove.getPairAction(playerHand, houseHand)) {
+    int firstCard = playerHand[0].value;
+    int secondCard = playerHand[1].value;
+    // Handle if both cards are Jack Queen or King, since these are defined as different values
+    if (10 <= firstCard && firstCard <= 12 && 10 <= secondCard && secondCard <= 12 ){
+        firstCard = 10;
+        secondCard = 10;
+    }
+    if (playerHand.size() == 2 && firstCard == secondCard) {
+        if (bestMove.getPairAction(firstCard, houseHand)) {
             char splitChoice;
             std::cout << "Do you want to split? (Y/N): ";
             std::cin >> splitChoice;
@@ -59,11 +65,11 @@ void Game::displayHands() const {
     // Display the rest of the cards face up
     for (size_t i = 1; i < houseHand.size(); ++i) {
         int value = houseHand[i].value;
-        if (value == 10) {
+        if (value == 11) {
             std::cout << "J" << houseHand[i].suit << " ";
-        } else if (value == 11) {
-            std::cout << "Q" << houseHand[i].suit << " ";
         } else if (value == 12) {
+            std::cout << "Q" << houseHand[i].suit << " ";
+        } else if (value == 13) {
             std::cout << "K" << houseHand[i].suit << " ";
         } else if (value == 1) {
             std::cout << "A" << houseHand[i].suit << " ";
@@ -77,11 +83,11 @@ void Game::displayHands() const {
     std::cout << "Player's Main Hand: ";
     for (const auto& card : playerHand) {
         int value = card.value;
-        if (value == 10) {
+        if (value == 11) {
             std::cout << "J" << card.suit << " ";
-        } else if (value == 11) {
-            std::cout << "Q" << card.suit << " ";
         } else if (value == 12) {
+            std::cout << "Q" << card.suit << " ";
+        } else if (value == 13) {
             std::cout << "K" << card.suit << " ";
         } else if (value == 1) {
             std::cout << "A" << card.suit << " ";
@@ -106,6 +112,13 @@ void Game::displayHands() const {
 void Game::hit() {
     // Draw a card and add it to the player's hand
     playerHand.push_back(deck.drawCard());
+}
+void Game::splitHit() {
+    // Draw a card and add it to the player's split hand
+    splitHand.push_back(deck.drawCard());
+}
+void Game::houseHit(){
+    splitHand.push_back(deck.drawCard());
 }
 
 void Game::doubleDown(int doubledBet) {
